@@ -1,27 +1,10 @@
-# AngularFileUpload
+# Spring Security Angular Multiple File Upload
+we will provide a solution to upload multiple files and images to server with angular as a client. We will be creating a sample Angular project and define a file component and hit REST endpoint to upload files. There will be an option either to select files from local PC or drag and drop the file from PC to browser and upload them in one shot.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.4.
+1. [Angular 7 CRUD Example](https://www.devglan.com/angular/angular-7-crud-example)
+2. [Angular Material Dialog](https://www.devglan.com/angular/angular-material-dialog)
+3. [Angular Material Data Table](https://www.devglan.com/angular/angular-data-table-example)
+4. [Angular 6 CRUD Example](https://www.devglan.com/angular/angular-6-example)
+5. [Angular Material Sidenav Example](https://www.devglan.com/angular/material-sidenav-example)
 
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Also, you can visit this page to explore all the [tutorials on Angular](https://www.devglan.com/tutorials/angular-tutorial)
