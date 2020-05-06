@@ -9,6 +9,7 @@ import {FileDropDirective, FileSelectDirective} from "ng2-file-upload";
 import {HttpClientModule} from "@angular/common/http";
 import {CustomMaterialModule} from "./file-upload/material.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {ApplicationService} from './app.service';
 
 @NgModule({
   declarations: [

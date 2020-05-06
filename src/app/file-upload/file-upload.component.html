@@ -1,47 +1,84 @@
-<h4>Welcome to {{ title }}!</h4>
+<h4>Хочеш знайти мінімальне кістякове дерево в умовах невизначеності для неорієнтованого графа ?</h4>
+
+<div class="main_info">
+  <p>Просто введи обмежуюче число <b>l</b>
+  <br> та завантаж файли із вмістом:</p>
+
+  <div class="code"> n
+    <br>
+    c11 c12 ... c1n
+    <br>
+    c21 c22 ... c2n
+<br>
+            ...
+    <br>
+    cn1 cn2 ... cnn
+  </div>
+
+  <p>Де cij - вага ребра ij, i =1,2,.. n, j= 1,2,.. n</p>
+  <p id="attention"> <b id="important">!!!</b>   УВАГА :  При i = j, cij = 0</p>
+</div>
+<h4>Почнемо ?</h4>
 <mat-card>
-      <form [formGroup]="uploadForm" (ngSubmit)="uploadSubmit()">
-        <mat-card-content>
-          <mat-form-field class="form-field">
-            <mat-label>Select Document Type</mat-label>
-            <mat-select formControlName="type" required>
-              <mat-option value="Passport">Passport</mat-option>
-              <mat-option value="Driving_license">Driving License</mat-option>
-              <mat-option value="PAN">PAN</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <br>
-          <input formControlName="document" type="file" ng2FileSelect accept=".png" [uploader]="uploader" multiple/><br/>
-          <br>
-          <div class="drop-zone">
-          <div ng2FileDrop [uploader]="uploader" class="drop-zone">
-             Drag and drop files to upload
+  <form [formGroup]="uploadForm" (ngSubmit)="uploadSubmit()" id="file-upload-form" class="uploader">
+    <mat-card-content>
+      <mat-form-field appearance="outline">
+        <mat-label>l</mat-label>
+        <input matInput placeholder="21" formControlName="l">
+        <mat-hint>Введи l</mat-hint>
+        <mat-error>Введи число!!!</mat-error>
+      </mat-form-field>
+      <br>
+      <input id="file-upload" type="file" ng2FileSelect accept=".txt" [uploader]="uploader" multiple/><br/>
+      <br>
+      <div>
+        <label for="file-upload" id="file-drag">
+          <img id="file-image" src="#" alt="Preview" class="hidden">
+          <div id="start">
+            <i class="fa fa-download" aria-hidden="true"></i>
+            <div> Перемістіть сюди файли з матрицями сюди</div>
+            <div id="notimage" class="hidden">Please select an txt file</div>
+            <span id="file-upload-btn" class="btn btn-primary">Select a file</span>
           </div>
+          <div id="response" class="hidden">
+            <div id="messages"></div>
+            <progress class="progress" id="file-progress" value="0">
+              <span>0</span>%
+            </progress>
           </div>
-          <table>
-            <thead>
-            <tr>
-              <th width="90%">
-                File Name
-              </th>
-              <th width="10%">
-                Remove
-              </th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let item of uploader.queue">
-              <th width="90%">
-                {{ item.file.name}}({{item.file.size/1000000}} MB)
-              </th>
-              <th class="text-center" width="10%">
-                <mat-icon (click)="item.remove()">delete</mat-icon>
-              </th>
-            </tr>
-            </tbody>
-          </table>
-          <br>
-          <button mat-raised-button color="accent" [disabled]="!uploadForm.valid" type="submit">Upload Data</button>
-        </mat-card-content>
-      </form>
+        </label>
+      </div>
+      <table>
+        <thead>
+        <tr>
+          <th width="90%">
+            File Name
+          </th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of uploader.queue">
+          <th width="90%">
+            {{ item.file.name}}({{item.file.size / 1000000}} MB)
+          </th>
+        </tr>
+        </tbody>
+      </table>
+      <br>
+      <button mat-stroked-button color="primary" type="submit">Upload Data</button>
+    </mat-card-content>
+  </form>
+
+  <div *ngIf="isResult">
+    Результат:
+    <hr>
+    <p>Ребро -- вартість</p>
+    <div *ngFor="let edge of result.edges">
+
+      <p>  {{edge.source}}   --   {{edge.destination}} -- {{edge.weight}}</p>
+    </div>
+    <p>Цільова функція = {{result.targetFunction}}</p>
+    <p>Відхилення = {{result.delta}}</p>
+  </div>
 </mat-card>
