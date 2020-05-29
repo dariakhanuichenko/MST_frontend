@@ -13,4 +13,8 @@ export class ApplicationService {
   uploadFile(files: FormData, l: number): Observable<Result> {
     return this.http.post<any>(`http://localhost:8080/api/upload/${l}`, files);
   }
+
+  getData(l: number, size: number, num: number): Observable<Result> {
+    return this.http.get<any>('http://localhost:8080/api/upload-random?l=' + l + '&size=' + size + '&number=' + num );
+  }
 }

@@ -3,3 +3,14 @@
   max-width: 50px;
   border: 3px solid green;
 }
+
+.main {
+  align-content: center;
+}
+.example-icon {
+  padding: 0 14px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}

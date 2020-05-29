@@ -4,6 +4,7 @@ import {FileUploader} from 'ng2-file-upload';
 import {ApplicationService} from '../app.service';
 import {Result} from '../model/Result';
 
+
 @Component({
   selector: 'app-file-upload',
   templateUrl: './file-upload.component.html',
@@ -13,7 +14,7 @@ export class FileUploadComponent implements OnInit {
 
   uploadForm: FormGroup;
   result: Result;
-  isResult: boolean = false;
+  isResult = false;
 
   public uploader: FileUploader = new FileUploader({
     isHTML5: true
@@ -22,7 +23,8 @@ export class FileUploadComponent implements OnInit {
 
 
   constructor(private fb: FormBuilder,
-              private applicationService: ApplicationService) {
+              private applicationService: ApplicationService,
+  ) {
   }
 
   uploadSubmit() {
@@ -43,9 +45,9 @@ export class FileUploadComponent implements OnInit {
     console.log(files);
     this.applicationService.uploadFile(files, this.l.value).subscribe(data => {
       this.result = data;
+      this.result.targetFunction = data.targetFunction;
+      this.isResultValid();
     });
-
-    this.isResultValid();
 
     this.uploader.clearQueue();
   }
@@ -64,11 +66,20 @@ export class FileUploadComponent implements OnInit {
   }
 
   isResultValid() {
-    if (this.result != null && this.result.targetFunction > 0) {
+    if (this.result != null && this.result.edges != null) {
       this.isResult = true;
     } else {
+      if (this.result.edges == null) {
+// this.openSnackBar('Invalid data format', 'show' );
+      }
       this.isResult = false;
     }
   }
+
+  // openSnackBar(message: string, action: string) {
+  //   this._snackBar.open(message, action, {
+  //     duration: 2000,
+  //   });
+  // }
 }
 
