@@ -1,7 +1,7 @@
 <h4>Хочеш знайти мінімальне кістякове дерево в умовах невизначеності для неорієнтованого графа ?</h4>
 
 <div class="main_info">
-  <p>Просто введи обмежуюче число <b>l</b>
+  <p>Просто введи  <b>допустимі відхилення</b>
   <br> та завантаж файли із вмістом:</p>
 
   <div class="code"> n
@@ -16,16 +16,16 @@
   </div>
 
   <p>Де cij - вага ребра ij, i =1,2,.. n, j= 1,2,.. n</p>
-  <p id="attention"> <b id="important">!!!</b>   УВАГА :  При i = j, cij = 0</p>
+  <p id="attention"> <b class="important">!!!</b>   УВАГА :  При i = j, cij = 0 <br> Кількість відхилень та кількість файлів має бути однакова<b class="important">!!!</b> </p>
 </div>
 <h4>Почнемо ?</h4>
 <mat-card>
   <form [formGroup]="uploadForm" (ngSubmit)="uploadSubmit()" id="file-upload-form" class="uploader">
     <mat-card-content>
       <mat-form-field appearance="outline">
-        <mat-label>l</mat-label>
-        <input matInput placeholder="Введи l" formControlName="l">
-        <mat-hint>Введи l</mat-hint>
+        <mat-label>Допустиме відхилення</mat-label>
+        <input matInput placeholder="Введи допустиме відхилення" formControlName="l">
+<!--        <mat-hint>Введи допустиме відхилення</mat-hint>-->
         <mat-error>Введи число!!!</mat-error>
       </mat-form-field>
       <br>
@@ -70,9 +70,15 @@
     </mat-card-content>
   </form>
 
+  <div  class = "error" *ngIf="error">
+    !!! Немає розв'язку або неправильно введені дані:<br>
+    відсутні відхилення або<br>
+    кількість файлів з матрицями та кількість відхилень не співпадають<br>
+  </div>
   <div *ngIf="isResult">
     Результат:
     <hr>
+    <p *ngIf="result.additional">Узагальнене МКД</p>
     <p>Ребро -- вартість</p>
     <div *ngFor="let edge of result.edges">
 

@@ -14,6 +14,7 @@ export class RandomComponent implements OnInit {
   uploadForm: FormGroup;
   result: Result;
   isResult = false;
+  error = false;
 
 
   constructor(private fb: FormBuilder,
@@ -22,7 +23,7 @@ export class RandomComponent implements OnInit {
 
   ngOnInit() {
     this.uploadForm = this.fb.group({
-      l: [null, [Validators.required, Validators.pattern('[0-9]+')]],
+      l: [null, [Validators.required, Validators.pattern('[0-9]+[0-9, ]*')]],
       size: [null, [Validators.required, Validators.pattern('[0-9]+')]],
       number: [null, [Validators.required, Validators.pattern('[0-9]+')]],
     });
@@ -45,6 +46,9 @@ export class RandomComponent implements OnInit {
         this.result = data;
         this.result.targetFunction = data.targetFunction;
         this.isResultValid();
+      },
+      error1 => {
+          this.error = true;
       }
     );
   }
@@ -54,11 +58,11 @@ export class RandomComponent implements OnInit {
       this.isResult = true;
     } else {
       if (this.result.edges == null) {
+        this.error = true;
 // this.openSnackBar('Invalid data format', 'show' );
       }
       this.isResult = false;
     }
   }
-
 }
 

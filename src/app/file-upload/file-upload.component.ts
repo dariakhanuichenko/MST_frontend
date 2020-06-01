@@ -15,6 +15,7 @@ export class FileUploadComponent implements OnInit {
   uploadForm: FormGroup;
   result: Result;
   isResult = false;
+  error = false;
 
   public uploader: FileUploader = new FileUploader({
     isHTML5: true
@@ -47,7 +48,11 @@ export class FileUploadComponent implements OnInit {
       this.result = data;
       this.result.targetFunction = data.targetFunction;
       this.isResultValid();
-    });
+    },
+      error1 => {
+        this.error = true;
+      }
+    );
 
     this.uploader.clearQueue();
   }
@@ -57,7 +62,7 @@ export class FileUploadComponent implements OnInit {
     this.uploadForm = this.fb.group({
       document: [null, null],
       type: [null, Validators.compose([Validators.required])],
-      l: [null, [Validators.required, Validators.pattern('[0-9]+')]]
+      l: [null, [Validators.required, Validators.pattern('[0-9]+[0-9, ]*')]]
     });
   }
 
