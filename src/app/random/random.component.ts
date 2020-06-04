@@ -3,7 +3,6 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ApplicationService} from '../app.service';
 import {Result} from '../model/Result';
 
-// import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   templateUrl: './random.component.html',
@@ -12,7 +11,7 @@ import {Result} from '../model/Result';
 export class RandomComponent implements OnInit {
 
   uploadForm: FormGroup;
-  result: Result;
+  result: Result[] =[];
   isResult = false;
   error = false;
 
@@ -23,15 +22,12 @@ export class RandomComponent implements OnInit {
 
   ngOnInit() {
     this.uploadForm = this.fb.group({
-      l: [null, [Validators.required, Validators.pattern('[0-9]+[0-9, ]*')]],
+      // l: [null, [Validators.required, Validators.pattern('[0-9]+[0-9, ]*')]],
       size: [null, [Validators.required, Validators.pattern('[0-9]+')]],
       number: [null, [Validators.required, Validators.pattern('[0-9]+')]],
     });
   }
 
-  get l() {
-    return this.uploadForm.get('l');
-  }
 
   get size() {
     return this.uploadForm.get('size');
@@ -42,9 +38,8 @@ export class RandomComponent implements OnInit {
   }
 
   upload() {
-    this.applicationService.getData(this.l.value, this.size.value, this.number.value).subscribe(data => {
+    this.applicationService.getData( this.size.value, this.number.value).subscribe(data => {
         this.result = data;
-        this.result.targetFunction = data.targetFunction;
         this.isResultValid();
       },
       error1 => {
@@ -54,12 +49,11 @@ export class RandomComponent implements OnInit {
   }
 
   isResultValid() {
-    if (this.result != null && this.result.edges != null) {
+    if (this.result !== null && this.result.length !== 0) {
       this.isResult = true;
     } else {
-      if (this.result.edges == null) {
+      if (this.result === []) {
         this.error = true;
-// this.openSnackBar('Invalid data format', 'show' );
       }
       this.isResult = false;
     }

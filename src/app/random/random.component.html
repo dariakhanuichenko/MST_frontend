@@ -1,27 +1,19 @@
 <h4>Хочеш знайти мінімальне кістякове дерево в умовах невизначеності для неорієнтованого графа ?</h4>
 
 <div class="main_info">
-  <p>Просто введи  <b>допустимі відхилення через кому</b>
+  <p>Просто введи
   <br>
     розмірнiсть матриці та кількість матриць
     <br>
   </p>
 
 
-  <p id="attention"> <b id="important">!!!</b>   УВАГА : допустимі відхилення, розмірність матриці, кількість матриць - це невід'ємні числа!!!
-    <br> Кількість відхилень та кількість матриць має бути однакова </p>
+  <p id="attention"> <b id="important">!!!</b>   УВАГА : розмірність матриці, кількість матриць - це невід'ємні числа!!!</p>
 </div>
 <h4>Почнемо ?</h4>
 <mat-card>
   <form [formGroup]="uploadForm" (ngSubmit)="upload()" id="file-upload-form" class="uploader">
     <mat-card-content>
-      <mat-form-field appearance="outline">
-        <mat-label>Допустимі відхилення</mat-label>
-        <input matInput placeholder="Введи допустиме відхилення" formControlName="l">
-<!--        <mat-hint>Введи допустиме відхилення</mat-hint>-->
-        <mat-error>Введи число!!!</mat-error>
-      </mat-form-field>
-      <br>
       <mat-form-field appearance="outline">
         <mat-label>Розмірність матриці</mat-label>
         <input matInput placeholder="Введи розмірність" formControlName="size">
@@ -38,7 +30,7 @@
       <br>
 
       <br>
-      <button mat-stroked-button color="primary" type="submit">Random</button>
+      <button mat-stroked-button color="primary" type="submit" >Random</button>
     </mat-card-content>
   </form>
 
@@ -49,14 +41,15 @@
   </div>
   <div *ngIf="isResult">
     Результат:
+    <div *ngFor="let r of result">
     <hr>
-    <p *ngIf="result.additional">Узагальнене МКД</p>
+    <p *ngIf="r.additional">Узагальнене МКД</p>
     <p>Ребро -- вартість</p>
-    <div *ngFor="let edge of result.edges">
+    <div *ngFor="let edge of r.edges">
 
       <p>  {{edge.source}}   --   {{edge.destination}} -- {{edge.weight}}</p>
     </div>
-    <p>Цільова функція = {{result.targetFunction}}</p>
-    <p>Відхилення = {{result.delta}}</p>
-  </div>
+    <p>Цільова функція = {{r.targetFunction}}</p>
+    <p>Відхилення = {{r.delta}}</p>
+  </div></div>
 </mat-card>

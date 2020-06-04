@@ -1,0 +1,52 @@
+<h4>Статистичні дані </h4>
+
+
+<figure class="highcharts-figure">
+  <div id="container"></div>
+</figure>
+<div id = "main">
+<figure class="highcharts-figure">
+  <div id="container1"></div>
+</figure>
+
+<figure class="highcharts-figure">
+  <div id="container2"></div>
+</figure>
+
+  <figure class="highcharts-figure">
+  <div id="container4"></div>
+</figure>
+  <figure class="highcharts-figure">
+  <div id="container3"></div>
+</figure>
+  </div>
+<table mat-table [dataSource]="statistics" matSort class="mat-elevation-z8">
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="time">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Time </th>
+    <td mat-cell *matCellDef="let element"> {{element.time}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="number">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Number matrix </th>
+    <td mat-cell *matCellDef="let element"> {{element.numberMatrix}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="size">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Size matrix  </th>
+    <td mat-cell *matCellDef="let element"> {{element.sizeMatrix}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="diaphazone">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Diaphazone  </th>
+    <td mat-cell *matCellDef="let element"> {{element.diphazone}} </td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

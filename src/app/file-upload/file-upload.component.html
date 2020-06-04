@@ -1,8 +1,7 @@
 <h4>Хочеш знайти мінімальне кістякове дерево в умовах невизначеності для неорієнтованого графа ?</h4>
 
 <div class="main_info">
-  <p>Просто введи  <b>допустимі відхилення</b>
-  <br> та завантаж файли із вмістом:</p>
+  <p>Просто завантаж файли із вмістом:</p>
 
   <div class="code"> n
     <br>
@@ -16,18 +15,12 @@
   </div>
 
   <p>Де cij - вага ребра ij, i =1,2,.. n, j= 1,2,.. n</p>
-  <p id="attention"> <b class="important">!!!</b>   УВАГА :  При i = j, cij = 0 <br> Кількість відхилень та кількість файлів має бути однакова<b class="important">!!!</b> </p>
+  <p id="attention"> <b class="important">!!!</b>   УВАГА :  При i = j, cij = 0 <br> cij - невід'ємні числа<b class="important">!!!</b> </p>
 </div>
 <h4>Почнемо ?</h4>
 <mat-card>
   <form [formGroup]="uploadForm" (ngSubmit)="uploadSubmit()" id="file-upload-form" class="uploader">
     <mat-card-content>
-      <mat-form-field appearance="outline">
-        <mat-label>Допустиме відхилення</mat-label>
-        <input matInput placeholder="Введи допустиме відхилення" formControlName="l">
-<!--        <mat-hint>Введи допустиме відхилення</mat-hint>-->
-        <mat-error>Введи число!!!</mat-error>
-      </mat-form-field>
       <br>
       <input id="file-upload" type="file" ng2FileSelect accept=".txt" [uploader]="uploader" multiple/><br/>
       <br>
@@ -77,14 +70,17 @@
   </div>
   <div *ngIf="isResult">
     Результат:
+    <div *ngFor="let r of result">
+
     <hr>
-    <p *ngIf="result.additional">Узагальнене МКД</p>
+    <p *ngIf="r.additional">Узагальнене МКД</p>
     <p>Ребро -- вартість</p>
-    <div *ngFor="let edge of result.edges">
+    <div *ngFor="let edge of r.edges">
 
       <p>  {{edge.source}}   --   {{edge.destination}} -- {{edge.weight}}</p>
     </div>
-    <p>Цільова функція = {{result.targetFunction}}</p>
-    <p>Відхилення = {{result.delta}}</p>
+    <p>Цільова функція = {{r.targetFunction}}</p>
+    <p>Відхилення = {{r.delta}}</p>
+  </div>
   </div>
 </mat-card>

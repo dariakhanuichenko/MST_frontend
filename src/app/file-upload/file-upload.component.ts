@@ -13,7 +13,7 @@ import {Result} from '../model/Result';
 export class FileUploadComponent implements OnInit {
 
   uploadForm: FormGroup;
-  result: Result;
+  result: Result[] = [];
   isResult = false;
   error = false;
 
@@ -44,9 +44,9 @@ export class FileUploadComponent implements OnInit {
       files.append('file', fileItem, fileItem.name);
     }
     console.log(files);
-    this.applicationService.uploadFile(files, this.l.value).subscribe(data => {
+    this.applicationService.uploadFile(files).subscribe(data => {
       this.result = data;
-      this.result.targetFunction = data.targetFunction;
+      // this.result.targetFunction = data.targetFunction;
       this.isResultValid();
     },
       error1 => {
@@ -66,18 +66,18 @@ export class FileUploadComponent implements OnInit {
     });
   }
 
-  get l() {
-    return this.uploadForm.get('l');
-  }
+  // get l() {
+  //   return this.uploadForm.get('l');
+  // }
 
   isResultValid() {
-    if (this.result != null && this.result.edges != null) {
+    if (this.result !== null && this.result !== []) {
       this.isResult = true;
     } else {
-      if (this.result.edges == null) {
+      if (this.result === []) {
 // this.openSnackBar('Invalid data format', 'show' );
+        this.isResult = false;
       }
-      this.isResult = false;
     }
   }
 

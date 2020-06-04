@@ -10,16 +10,19 @@ import {HttpClientModule} from '@angular/common/http';
 import {CustomMaterialModule} from './file-upload/material.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RandomComponent} from './random/random.component';
+import {StatisticsComponent} from './statistics/statistics.component';
 
 const routes: Routes = [
    { path: 'file', component: FileUploadComponent },
   { path: 'random', component: RandomComponent },
+  { path: 'statistics', component: StatisticsComponent },
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     FileUploadComponent,
+    StatisticsComponent,
     RandomComponent,
     FileSelectDirective,
     FileDropDirective
